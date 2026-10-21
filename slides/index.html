@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harry Potter Spells — 데이터 분석</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="hp-theme">
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Cover -->
+      <section data-background-gradient="radial-gradient(circle at 50% 40%, rgba(212,175,55,0.30) 0%, rgba(5,5,18,0) 55%)">
+        <p class="cover-tag">Wizardry World · Spell Database</p>
+        <h1 class="cover-title">Harry Potter<br>Spells</h1>
+        <svg class="bolt" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/>
+        </svg>
+        <p class="subtitle">주문 데이터 분석 · 총 <span id="cover-count">10</span>개의 마법 주문</p>
+        <div class="divider">✦</div>
+        <p class="slide-cite">출처: Kaggle · juliasays/harry-potter-spells</p>
+      </section>
+
+      <!-- Agenda -->
+      <section data-background-gradient="radial-gradient(circle at 80% 20%, rgba(14,26,64,0.85) 0%, rgba(5,5,18,0) 55%)">
+        <h2>목차</h2>
+        <ol class="agenda">
+          <li>데이터 소개</li>
+          <li>전체 통계</li>
+          <li>난이도 분포</li>
+          <li>난이도 구간 분석</li>
+          <li>주문 카테고리</li>
+          <li>인사이트</li>
+          <li>주문 목록</li>
+          <li>References</li>
+        </ol>
+        <p class="slide-cite">출처: Kaggle · juliasays/harry-potter-spells</p>
+      </section>
+
+      <!-- About the data -->
+      <section data-background-gradient="radial-gradient(circle at 80% 20%, rgba(14,26,64,0.85) 0%, rgba(5,5,18,0) 55%)">
+        <h2>1 · 데이터 소개</h2>
+        <ul>
+          <li>Kaggle 데이터셋: <code>juliasays/harry-potter-spells</code></li>
+          <li>컬럼: 번호 · 주문명 · 설명 · 난이도(호그와트 1~7학년)</li>
+          <li>분석 대상: <code>spells.json</code> (스크립트 산출물)</li>
+        </ul>
+        <p class="slide-cite">출처: Kaggle · juliasays/harry-potter-spells</p>
+      </section>
+
+      <!-- Overview stats -->
+      <section data-background-gradient="radial-gradient(circle at 20% 20%, rgba(212,175,55,0.25) 0%, rgba(5,5,18,0) 50%)">
+        <h2>2 · 전체 통계</h2>
+        <div class="stat-grid">
+          <div class="stat-card"><span class="stat-num" id="stat-count">–</span><span>총 주문 수</span></div>
+          <div class="stat-card"><span class="stat-num" id="stat-mean">–</span><span>평균 난이도</span></div>
+          <div class="stat-card"><span class="stat-num" id="stat-min">–</span><span>최저 난이도</span></div>
+          <div class="stat-card"><span class="stat-num" id="stat-max">–</span><span>최고 난이도</span></div>
+        </div>
+        <p class="slide-cite">출처: Kaggle · juliasays/harry-potter-spells · 자동 계산</p>
+      </section>
+
+      <!-- Complexity distribution -->
+      <section data-background-gradient="radial-gradient(circle at 50% 15%, rgba(127,9,9,0.50) 0%, rgba(5,5,18,0) 55%)">
+        <h2>3 · 난이도 분포</h2>
+        <div id="dist-chart" class="bar-chart"></div>
+        <p class="slide-cite">출처: Kaggle · juliasays/harry-potter-spells · <code>complexity</code> 기준</p>
+      </section>
+
+      <!-- Difficulty tiers -->
+      <section data-background-gradient="radial-gradient(circle at 85% 80%, rgba(26,71,42,0.65) 0%, rgba(5,5,18,0) 55%)">
+        <h2>4 · 난이도 구간 분석</h2>
+        <div id="tier-cards" class="tier-grid"></div>
+        <p class="slide-cite">출처: Kaggle · juliasays/harry-potter-spells · 1~2 초급 / 3~5 중급 / 6~7 고급</p>
+      </section>
+
+      <!-- Spell categories -->
+      <section data-background-gradient="radial-gradient(circle at 15% 80%, rgba(14,26,64,0.85) 0%, rgba(5,5,18,0) 55%)">
+        <h2>5 · 주문 카테고리</h2>
+        <div id="cat-grid" class="tier-grid"></div>
+        <p class="slide-cite">출처: Kaggle · juliasays/harry-potter-spells · 설명 키워드 기반 분류</p>
+      </section>
+
+      <!-- Insights -->
+      <section data-background-gradient="radial-gradient(circle at 50% 85%, rgba(127,9,9,0.40) 0%, rgba(5,5,18,0) 55%)">
+        <h2>6 · 인사이트</h2>
+        <ul id="insights"></ul>
+        <p class="slide-cite">출처: Kaggle · juliasays/harry-potter-spells · 관찰 정리</p>
+      </section>
+
+      <!-- Full spell list -->
+      <section data-background-gradient="radial-gradient(circle at 50% 15%, rgba(212,175,55,0.22) 0%, rgba(5,5,18,0) 55%)">
+        <h2>7 · 주문 목록</h2>
+        <table id="spells-table">
+          <thead>
+            <tr><th>#</th><th>Spell</th><th>Effect</th><th>난이도</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p class="slide-cite">출처: Kaggle · juliasays/harry-potter-spells</p>
+      </section>
+
+      <!-- References -->
+      <section data-background-gradient="radial-gradient(circle at 50% 50%, rgba(20,20,45,0.85) 0%, rgba(5,5,18,0) 60%)">
+        <h2>References</h2>
+        <ul>
+          <li>Kaggle: <a href="https://www.kaggle.com/datasets/juliasays/harry-potter-spells">juliasays/harry-potter-spells</a></li>
+          <li>Raw data: <code>data/raw/Harry Potter Spells.csv</code></li>
+          <li>Processed data: <code>data/processed/spells.json</code></li>
+          <li>이미지/추가 출처: <code>references/</code></li>
+        </ul>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="js/spells-data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
